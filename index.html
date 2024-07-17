@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-commerce Website</title>
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<header>
+    <h1>E-commerce Website</h1>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h2>Explore Our Products</h2>
+        <div id="product-list" class="products-container">
+            <!-- Product cards will be dynamically inserted here -->
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Your Company</p>
+</footer>
+
+<script>
+    // Example product data (could come from a database or backend)
+    const products = [
+        { id: 1, name: "Product 1", image: "product1.jpg", price: 19.99 },
+        { id: 2, name: "Product 2", image: "product2.jpg", price: 29.99 },
+        { id: 3, name: "Product 3", image: "product3.jpg", price: 24.99 },
+        { id: 4, name: "Product 4", image: "product4.jpg", price: 39.99 },
+        { id: 5, name: "Product 5", image: "product5.jpg", price: 49.99 },
+        { id: 6, name: "Product 6", image: "product6.jpg", price: 14.99 },
+        { id: 7, name: "Product 7", image: "product7.jpg", price: 34.99 },
+        { id: 8, name: "Product 8", image: "product8.jpg", price: 44.99 },
+        { id: 9, name: "Product 9", image: "product9.jpg", price: 19.99 },
+        { id: 10, name: "Product 10", image: "product10.jpg", price: 54.99 }
+    ];
+
+    const productList = document.getElementById("product-list");
+
+    // Function to generate product cards
+    function generateProductCard(product) {
+        const card = document.createElement("div");
+        card.classList.add("product-card");
+
+        // Product image
+        const img = document.createElement("img");
+        img.src = `images/${product.image}`;
+        img.alt = product.name;
+        card.appendChild(img);
+
+        // Product content
+        const content = document.createElement("div");
+        content.classList.add("product-card-content");
+
+        // Product name
+        const productName = document.createElement("h3");
+        productName.textContent = product.name;
+        content.appendChild(productName);
+
+        // Product price
+        const price = document.createElement("p");
+        price.textContent = `$${product.price.toFixed(2)}`;
+        content.appendChild(price);
+
+        // Product options (for example, select quantity)
+        const quantityLabel = document.createElement("label");
+        quantityLabel.textContent = "Quantity:";
+        content.appendChild(quantityLabel);
+
+        const quantitySelect = document.createElement("select");
+        quantitySelect.name = `quantity-${product.id}`;
+        quantitySelect.innerHTML = `
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        `;
+        content.appendChild(quantitySelect);
+
+        // Button to add to cart (dummy functionality)
+        const addToCartButton = document.createElement("button");
+        addToCartButton.textContent = "Add to Cart";
+        addToCartButton.addEventListener("click", () => {
+            alert(`Added ${product.name} to cart!`);
+        });
+        content.appendChild(addToCartButton);
+
+        card.appendChild(content);
+
+        return card;
+    }
+
+    // Populate product cards
+    products.forEach(product => {
+        const productCard = generateProductCard(product);
+        productList.appendChild(productCard);
+    });
+</script>
+
+</body>
+</html>
